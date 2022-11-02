@@ -2,8 +2,13 @@ import MenuLinks from "../(components)/MenuLinks";
 import React from "react";
 
 export async function generateStaticParams(){
-    let unpaidPayments = await fetch("https://server-neon-tau.vercel.app/api/unpaid")
-    return unpaidPayments.map((paymentObj) => ({paymentURL : paymentObj.url}))
+    const unpaidPayments = await fetch("https://server-neon-tau.vercel.app/api/unpaid")
+    let returnArray = []
+    for(let elem in unpaidPayments){
+        returnArray.push({paymentURL : unpaidPayments[elem].url})
+
+    }
+    return returnArray
 }
 
 async function getUnpaid(){
